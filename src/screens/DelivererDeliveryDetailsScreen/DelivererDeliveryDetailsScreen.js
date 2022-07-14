@@ -3,7 +3,6 @@ import { Text, TextInput, TouchableOpacity, KeyboardAvoidingView, ScrollView, Fl
 import styles from './styles';
 import { getAuth } from "firebase/auth";
 import { getFirestore, doc, updateDoc, setDoc } from "firebase/firestore"; 
-import DropDownPicker from 'react-native-dropdown-picker';
 
 export default function DelivererDeliveryDetails({route, navigation}) {
     const {deliveryPlace} = route.params;
@@ -43,12 +42,37 @@ export default function DelivererDeliveryDetails({route, navigation}) {
             });
         console.log(ETA.length)
         console.log(capacity.length)
+        console.log(parseInt("00003"))
+        //ETA must be 4 digits (in 24h clock)
         if (ETA.length != 4) {
             alert("Please enter valid estimated delivery time!")
         }
         else if (parseInt(ETA) > 2359) {
             alert("Please enter valid estimated delivery time!")
         }
+        //acounting for xx6x xx7x xx8x xx9x
+
+        //for numbers in between 1000 and 2359
+        else if ((parseInt(ETA) <= 2359 && parseInt(ETA) >= 1000) && 
+        (Math.floor((parseInt(ETA) % 100) / 10) == 6 || Math.floor((parseInt(ETA) % 100) / 10) == 7 || 
+        Math.floor((parseInt(ETA) % 100) / 10) == 8 || Math.floor((parseInt(ETA) % 100) / 10) == 9)) {
+                alert("Please enter valid estimated delivery time!") 
+        }
+
+        //for numbers in between 100 and 999
+        else if ((parseInt(ETA) <= 999 && parseInt(ETA) >= 100) && 
+        (Math.floor((parseInt(ETA) / 10) % 10) == 6 || Math.floor((parseInt(ETA) / 10) % 10) == 7 || 
+        Math.floor((parseInt(ETA) / 10) % 10) == 8 ||Math.floor((parseInt(ETA) / 10) % 10) == 9)) {
+            alert("Please enter valid estimated delivery time!") 
+        }
+        
+        //for numbers in between 10 and 99
+        else if ((parseInt(ETA) >= 10 && parseInt(ETA) <= 99) && 
+        (Math.floor(parseInt(ETA) / 10) == 6 || Math.floor(parseInt(ETA) / 10) == 7 || 
+        Math.floor(parseInt(ETA) / 10) == 8 || Math.floor(parseInt(ETA) / 10) == 9)) {
+            alert("Please enter valid estimated delivery time!")  
+        }
+
         //already restricted to 1 digit below hence this accounts for null value
         else if (capacity.length != 1) {
             alert("Please enter Order Capacity!")           
