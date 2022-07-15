@@ -130,7 +130,10 @@ export default function PaymentScreen({navigation, route}) {
             </TouchableOpacity>
             
             {image !== null ? (
-            <Image source={{ uri: image }} style={{ width: 250, height: 250 }} />
+            <View>
+                <Image source={{ uri: image }} style={{ width: 250, height: 250 }} />
+                <Text style={styles.uploadText}> Uploaded screenshot! </Text>
+            </View>
             ) : null}
 
             {uploading ? (

@@ -16,6 +16,10 @@ export default StyleSheet.create({
         textAlign: "center",
         fontWeight: '700', 
     },
+    uploadText:{
+        color:'white',
+        textAlign:'center'
+    },
     text2 : {
         marginTop:30,
         fontStyle: 'normal',
