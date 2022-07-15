@@ -62,10 +62,14 @@ export default function PaymentScreen({navigation, route}) {
     
     const onUpdatePress = () => {
         //add food to firebase order cart
+        if (image) {
         navigation.navigate("View Order",
             {delivererEmail:delivererEmail,delivererName:delivererName,
             delivererNum:delivererNum, totalPrice:totalPrice})
-        }
+        } else {
+            alert('Please upload a screenshot of your payment for verification before continuing on your order!')
+        } 
+    }
         async function uploadImageAsync(uri) {
             // Why are we using XMLHttpRequest? See:
             // https://github.com/expo/expo/issues/2402#issuecomment-443726662
@@ -133,17 +137,15 @@ export default function PaymentScreen({navigation, route}) {
             <View style={styles.progressBarContainer}>
                  <ActivityIndicator color="#fff" animating size="large" />
             </View>
-            ) : (
-            <View>
-                <Text style={styles.buttonTitle}> Uploaded!</Text>
-            </View>
+            ) : ( null
             )}
-             <StatusBar barStyle="default" />
+            
+
 
             <TouchableOpacity style = {styles.button}
                 onPress={() => onUpdatePress()}
             >
-                <Text style={styles.buttonTitle}> Confirm Payment</Text>
+                <Text style={styles.buttonTitle}> Continue</Text>
             </TouchableOpacity>
         </SafeAreaView>
     )
