@@ -61,7 +61,7 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
                 // Profile updated!
                 console.log('order delivered')
                 alert("Order Marked As Delivered!");
-                onClickCheckReq();
+                
               }).catch((error) => {
                 // An error occurred
                 alert(error)
