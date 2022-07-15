@@ -97,6 +97,7 @@ export default function DelivererListScreen({navigation, route}) {
         justifyContent: 'center'
     },
     item: {
+        marginTop:5,
         padding: 16,
         borderRadius: 16,
         alignSelf:'stretch',
