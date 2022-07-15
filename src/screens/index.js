@@ -16,3 +16,4 @@ export { default as WhereToDeliverScreen } from './WhereToDeliverScreen/WhereToD
 export { default as DelivererDeliveryDetailsScreen } from './DelivererDeliveryDetailsScreen/DelivererDeliveryDetailsScreen'
 export { default as ShowingDeliveryDetailsScreen } from './ShowingDeliveryDetailsScreen/ShowingDeliveryDetailsScreen'
 export { default as ShowingRequestScreen } from './ShowingRequestScreen/ShowingRequestScreen'
+export { default as DelivererCurrentOrdersScreen } from './DelivererCurrentOrdersScreen/DelivererCurrentOrdersScreen'
