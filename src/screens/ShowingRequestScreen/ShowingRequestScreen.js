@@ -19,13 +19,13 @@ export default function ShowingRequestScreen({route, navigation}) {
         .then(docSnap => {
             if (docSnap.exists()) {
                 //Estimated delivery time
-                onChangeNumTime((prevState) => [...prevState, docSnap.data().ETA]);
+                onChangeNumTime(() => [docSnap.data().ETA]);
                 //Order Capacity
-                onChangeNumOrder((prevState) => [...prevState, docSnap.data().capacity]);
+                onChangeNumOrder(() => [docSnap.data().capacity]);
                 //Takeaway Location
-                onChangeFPlace((prevState) => [...prevState, docSnap.data().foodPlace]);
+                onChangeFPlace(() => [docSnap.data().foodPlace]);
                 //Delivery Location
-                onChangeDPlace((prevState) => [...prevState, docSnap.data().deliveryPlace]);
+                onChangeDPlace(() => [docSnap.data().deliveryPlace]);
             } else {
               console.log("No Current Requests!");
               alert("No Current Requests!")
