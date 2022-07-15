@@ -6,6 +6,9 @@ export default StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#393939'
     },
+    scrollview: {
+        backgroundColor: '#393939'
+    },
     text : {
         marginTop:30,
         fontStyle: 'normal',
