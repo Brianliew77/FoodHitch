@@ -6,7 +6,7 @@ import { LoginScreen, HomeScreen, RegistrationScreen, ForgotPasswordScreen,
   ForgotFinalScreen, OrdererHomeScreen, NewOrderScreen1, NewOrderScreen2, 
   DelivererListScreen, CartScreen, PaymentScreen, ViewOrderScreen, 
   DelivererHomeScreen, ShowingRequestScreen, WhereToBuyFoodScreen, WhereToDeliverScreen, DelivererDeliveryDetailsScreen,
-ShowingDeliveryDetailsScreen} from './src/screens'
+ShowingDeliveryDetailsScreen, DelivererCurrentOrdersScreen} from './src/screens'
 
 import {decode, encode} from 'base-64'
 import { initializeApp } from "firebase/app";
@@ -140,7 +140,14 @@ export default function App() {
                 headerStyle: {
                 backgroundColor: '#FFAC4B'
                 }
-                }} />    
+                }} />
+            <Stack.Screen name="DelivererCurrentOrdersScreen" component={DelivererCurrentOrdersScreen}
+              options={{
+                title: 'Your Current Orders',
+                headerStyle: {
+                backgroundColor: '#FFAC4B'
+                }
+                }} />                        
             </>
         ) : (
           <>
@@ -219,6 +226,13 @@ export default function App() {
                 backgroundColor: '#FFAC4B'
                 }
                 }} />    
+            <Stack.Screen name="DelivererCurrentOrdersScreen" component={DelivererCurrentOrdersScreen}
+              options={{
+                title: 'Your Current Orders',
+                headerStyle: {
+                backgroundColor: '#FFAC4B'
+                }
+                }} />                   
           </>
         )}
       </Stack.Navigator>
