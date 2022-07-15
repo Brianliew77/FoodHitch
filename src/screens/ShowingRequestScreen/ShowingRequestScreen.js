@@ -3,6 +3,7 @@ import { Text, SafeAreaView, TouchableOpacity } from 'react-native'
 import { getAuth} from "firebase/auth";
 import styles from './styles';
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default function ShowingRequestScreen({route, navigation}) {
     const [numTime, onChangeNumTime] = useState([])
@@ -31,7 +32,12 @@ export default function ShowingRequestScreen({route, navigation}) {
               alert("No Current Requests!")
             }
           })      
-        }  
+        } 
+        
+        
+        const onPressCheckOrders = () => {
+          navigation.navigate("DelivererCurrentOrdersScreen")
+        }
 
         const onPressisPending = () => {
             const auth = getAuth();
@@ -96,6 +102,7 @@ export default function ShowingRequestScreen({route, navigation}) {
 
     return (
         <SafeAreaView style={styles.container}>
+        <ScrollView style={styles.scrollview}>
             
             <Text style={styles.text2}>{'\n'}</Text>
             <TouchableOpacity
@@ -110,7 +117,14 @@ export default function ShowingRequestScreen({route, navigation}) {
             <Text style={styles.text4}>Estimated delivery time: {numTime}</Text>
             <Text style={styles.text4}>Delivery Location: {dPlace}</Text>
 
-            <Text style={styles.text4}>Order Capacity {numOrder}</Text>
+            <Text style={styles.text4}>Order Capacity: {numOrder}</Text>
+
+            <Text style={styles.text2}>{'\n'}</Text>
+            <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => onPressCheckOrders()}>
+                    <Text style={styles.buttonTitle}>Click Me To Show Your Current Orders</Text>
+            </TouchableOpacity>
 
 
             <Text style={styles.text4}>Update Order Status:</Text>
@@ -133,7 +147,7 @@ export default function ShowingRequestScreen({route, navigation}) {
                     <Text style={styles.buttonTitle}>Order Delivered</Text>
             </TouchableOpacity>
             
-
+        </ScrollView>
         </SafeAreaView>
 
     )
