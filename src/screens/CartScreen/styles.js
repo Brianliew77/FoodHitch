@@ -15,9 +15,21 @@ export default StyleSheet.create({
     },
     title: {
         fontSize: 32,
-        color:'grey',
+        color:'black',
 
-    },    
+    },
+    terms:{
+        color:'white',
+        textAlign:'center'
+    },
+    priceDisplay:{
+        color:'white',
+        fontSize:28,
+        textAlign:'center',
+        backgroundColor:'green',
+        paddingVertical:5,
+        marginTop:10
+    },
     item: {
         backgroundColor: '#f9c2ff',
         padding: 20,
