@@ -1,9 +1,10 @@
 
-import React, { useState} from 'react'
+import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Text, SafeAreaView, TouchableOpacity } from 'react-native'
 import { getAuth} from "firebase/auth";
 import styles from './styles';
-import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
+import { getFirestore, doc, getDoc, updateDoc, getDocs, onSnapshot,  collection, query, where,  } from "firebase/firestore";
 import { ScrollView } from 'react-native-gesture-handler';
 
 export default function DelivererCurrentOrdersScreen({route, navigation}) {
@@ -21,7 +22,7 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
           ).then(() => {
             // Profile updated!
             console.log('order pending')
-            alert("Order Marked As Pending!")
+            alert("Orderers will see food items status as PENDING!")
           }).catch((error) => {
             // An error occurred
             alert(error)
@@ -41,8 +42,7 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
           ).then(() => {
             // Profile updated!
             console.log('order on the way')
-            alert("Order Marked As On The Way!");
-            
+            alert("Orderers will see food items status as ON THE WAY!")
           }).catch((error) => {
             // An error occurred
             alert(error)
@@ -61,19 +61,21 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
               ).then(() => {
                 // Profile updated!
                 console.log('order delivered')
-                alert("Order Marked As Delivered!");
-                
+                alert("Orderers will see food items status as DELIVERED!")
               }).catch((error) => {
                 // An error occurred
                 alert(error)
               });           
             }
-
     return (
     <SafeAreaView style={styles.container}>
     <ScrollView style={styles.scrollview}>
 
-    <Text style={styles.text4}>Update Order Status:</Text>
+    <Text style={styles.text}>Your Current Orders Are:</Text>
+
+    <Text style={styles.text2}>{'\n'}</Text>
+
+    <Text style={styles.text4}>Update Orders Status:</Text>
             
             <TouchableOpacity
                     style={styles.button}
