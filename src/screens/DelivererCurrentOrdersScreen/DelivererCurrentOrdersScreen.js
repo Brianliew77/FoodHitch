@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from 'react'
+
+import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { Text, SafeAreaView, TouchableOpacity } from 'react-native'
 import { getAuth} from "firebase/auth";
 import styles from './styles';
@@ -96,4 +98,3 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
     </SafeAreaView>
     )
 }
-

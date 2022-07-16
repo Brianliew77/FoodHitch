@@ -93,6 +93,15 @@ export default function ViewOrderScreen({navigation, route}) {
         });
     },[foodBought]) //for delivery status
 
+    //creating item component
+    const Item = ({ title }) => (
+        <View style={styles.item}>
+          <Text style={styles.title}>{title}</Text>
+        </View>
+      );
+    const renderItem = ({ item }) => (
+    <Item title={item} />
+    );
     
     return (
         <SafeAreaView style={styles.container}>
@@ -101,11 +110,11 @@ export default function ViewOrderScreen({navigation, route}) {
             <Text style={[styles.text2]}> Number : {num}</Text>
             <Text style={styles.text}> Order Summary: </Text>
             <FlatList
-                data={[foodBought]}
-                renderItem={({item}) => <Text style={styles.item}>{item}</Text>}
+                data={foodBought}
+                renderItem={renderItem}
             />
-            <Text style={styles.text}> Status: {deliveryStatus}</Text>
-            <Text style={styles.text}> Order Total: ${price}</Text>
+            <Text style={styles.status}> Status: {deliveryStatus}  </Text>
+            <Text style={styles.price}> Order Total: ${price}</Text>
             <TouchableOpacity
                     style={styles.button}
                     onPress={()=>onPressCheckStatus()}>

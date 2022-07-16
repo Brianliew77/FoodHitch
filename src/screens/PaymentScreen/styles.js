@@ -16,6 +16,10 @@ export default StyleSheet.create({
         textAlign: "center",
         fontWeight: '700', 
     },
+    uploadText:{
+        color:'white',
+        textAlign:'center'
+    },
     text2 : {
         marginTop:30,
         fontStyle: 'normal',
@@ -27,10 +31,11 @@ export default StyleSheet.create({
     },
     button: {
         backgroundColor: '#788eec',
-        marginLeft: 30,
-        marginRight: 30,
         marginTop: 10,
-        height: 48,
+        paddingHorizontal: 100,
+        height:48,
+        marginTop:10,
+        marginBottom:10,
         borderRadius: 5,
         alignItems: "center",
         justifyContent: 'center'

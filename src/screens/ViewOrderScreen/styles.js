@@ -6,6 +6,17 @@ export default StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#393939'
     },
+    item: {
+        backgroundColor: '#f9c2ff',
+        padding: 20,
+        marginVertical: 8,
+        marginHorizontal: 16,
+      },
+    title: {
+        fontSize: 32,
+        color:'black',
+
+    },
     text : {
         marginTop:30,
         fontStyle: 'normal',
@@ -15,6 +26,26 @@ export default StyleSheet.create({
         alignItems: 'flex-end',
         textAlign: "center",
         fontWeight: '700', 
+    },
+    status : {
+        marginTop:30,
+        fontStyle: 'normal',
+        fontSize: 32,
+        color: '#FFFFFF',
+        textAlign: "center",
+        fontWeight: '700',
+        backgroundColor:'grey',
+        paddingHorizontal:18
+    },
+    price : {
+        marginTop:30,
+        fontStyle: 'normal',
+        fontSize: 32,
+        paddingHorizontal:80,
+        color: '#FFFFFF',
+        textAlign: "center",
+        fontWeight: '700',
+        backgroundColor:'green'
     },
     text2 : {
         marginTop:30,
@@ -27,9 +58,8 @@ export default StyleSheet.create({
     },
     button: {
         backgroundColor: '#788eec',
-        marginLeft: 30,
-        marginRight: 30,
         marginTop: 10,
+        width:300,
         height: 48,
         borderRadius: 5,
         alignItems: "center",
