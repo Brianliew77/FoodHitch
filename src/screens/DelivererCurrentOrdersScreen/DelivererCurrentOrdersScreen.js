@@ -65,29 +65,6 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
                 alert(error)
               });           
             }
-            /*
-            const onRefreshPress = () => {
-                setIsFetching(true)
-                const reqRef = collection(db, "Request");
-                const q = query(reqRef, where("deliveryPlace", "==", CollectAt));
-                const querySnapshot = getDocs(q).then( querySnapshot =>
-                querySnapshot.forEach((doc) => {
-                    // doc.data() is never undefined for query doc snapshots
-                    console.log(doc.data())
-                    if (DATA.some(element=>{
-                        if (element.delivererEmail===doc.data().delivererEmail) {
-                            return true
-                        }
-                        return false
-                    })) {
-                        console.log("exist in DATA le")
-                    } else {
-                        setDATA((prevState)=> {return [...prevState, doc.data()]})
-                    }
-                }))
-                setIsFetching(false)
-            }
-            */
     return (
     <SafeAreaView style={styles.container}>
     <ScrollView style={styles.scrollview}>
