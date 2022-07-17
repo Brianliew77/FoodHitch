@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, TouchableOpacity, SafeAreaView } from 'react-native'
+import { Text, TouchableOpacity, SafeAreaView, ImageBackground } from 'react-native'
 import styles from './styles';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -22,22 +22,25 @@ export default function WhereToDeliverScreen({route, navigation}) {
             
             <Text style={styles.text2}>{'\n'}</Text>
 
-            <TouchableOpacity
-                style={styles.button2}
-                onPress={() => toRafflesHall()}>
-                <Text style={styles.text3}>Raffles Hall</Text>
+            <TouchableOpacity 
+                    onPress={() => toRafflesHall()}>
+            <ImageBackground style = {styles.button2} source={require('../../../assets/hawker1.jpg')}>
+            <Text style={styles.text}> Raffles Hall</Text>
+            </ImageBackground>
             </TouchableOpacity>
 
-            <TouchableOpacity
-                style={styles.button2}
-                onPress={() => toKEVIIHall()}>
-                <Text style={styles.text3}>KEVII Hall</Text>
+            <TouchableOpacity 
+                    onPress={() => toKEVIIHall()}>
+            <ImageBackground style = {styles.button2} source={require('../../../assets/hawk3.jpg')}>
+            <Text style={styles.text}> KEVII Hall</Text>
+            </ImageBackground>
             </TouchableOpacity>
 
-            <TouchableOpacity
-                style={styles.button2}
-                onPress={() => toKRHall()}>
-                <Text style={styles.text3}>Kent Ridge Hall</Text>
+            <TouchableOpacity 
+                    onPress={() => toKRHall()}>
+            <ImageBackground style = {styles.button2} source={require('../../../assets/hawker2.jpg')}>
+            <Text style={styles.text}> Kent Ridge Hall</Text>
+            </ImageBackground>
             </TouchableOpacity>
         
         </ScrollView>
