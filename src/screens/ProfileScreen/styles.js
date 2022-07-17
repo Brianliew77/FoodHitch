@@ -11,18 +11,17 @@ export default StyleSheet.create({
         backgroundColor: '#393939',
         marginTop:10
     },
+    emailText:{
+        color:'white',
+        alignSelf:'center'
+    },
     welcomeText1:{
         fontSize:32,
         color:'white',
+        marginTop: 30,
+        fontWeight:'700'
         
     },
-    welcomeText2:{
-        fontSize:32,
-        fontStyle:'italic',
-        color: '#788eec',
-        textAlign: "center",
-    },
-
     profileImage:{
         height:50,
         width:50,
@@ -39,10 +38,27 @@ export default StyleSheet.create({
         textAlign: "center",
         fontWeight: '700', 
     },
+    emailText : {
+        marginTop:10,
+        fontStyle: 'italic',
+        fontSize: 20,
+        color: 'white',
+        textAlign: "center",
+        fontWeight: '700', 
+    },
     logo: {
         margin:20,
         height: 90,
         width: 90,
+        alignSelf: "center",
+    },
+    lineWrap:{
+        flexDirection:'row',
+        alignItems:'stretch'
+    },
+    logo2: {
+        height: 40,
+        width: 40,
         alignSelf: "center",
     },
     text2: {
@@ -101,6 +117,7 @@ export default StyleSheet.create({
         marginBottom: 10,
         marginLeft: 30,
         marginRight: 30,
-        paddingLeft: 16
+        width:200,
+        textAlign:'center'
     }
 })
