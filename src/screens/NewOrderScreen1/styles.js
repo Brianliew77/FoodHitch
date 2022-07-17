@@ -11,7 +11,7 @@ export default StyleSheet.create({
         marginTop:30,
         fontStyle: 'normal',
         fontSize: 32,
-        color: '#FFFFFF',
+        color: 'white',
         display: 'flex',
         alignItems: 'flex-end',
         textAlign: "center",
