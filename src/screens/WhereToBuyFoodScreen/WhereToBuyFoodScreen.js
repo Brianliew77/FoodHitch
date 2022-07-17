@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, TouchableOpacity, SafeAreaView } from 'react-native'
+import { Text, TouchableOpacity, SafeAreaView, ImageBackground } from 'react-native'
 import styles from './styles';
 
 
@@ -14,25 +14,26 @@ export default function WhereToBuyFoodScreen({route, navigation}) {
             <Text style={styles.text}>Where are you going to buy food?</Text>
             <Text style={styles.text2}>{'\n'}</Text>
 
-            <TouchableOpacity
-                style={styles.button2}
-                onPress={() => toUtownFineFoods()}>
-                <Text style={styles.text3}>Utown Fine Foods</Text>
+            <TouchableOpacity 
+                    onPress={() => toUtownFineFoods()}>
+            <ImageBackground style = {styles.button2} source={require('../../../assets/utown.jpg')}>
+            <Text style={styles.text}> Utown Fine Foods</Text>
+            </ImageBackground>
             </TouchableOpacity>
 
-
-            <TouchableOpacity
-                style={styles.button2}
-                onPress={() => toPGPAirconFoodCourt()}>
-                <Text style={styles.text3}>PGP Aircon Food Court</Text>
+            <TouchableOpacity 
+                    onPress={() => toPGPAirconFoodCourt()}>
+            <ImageBackground style = {styles.button2} source={require('../../../assets/pgp.jpg')}>
+            <Text style={styles.text}> PGP Aircon Food Court</Text>
+            </ImageBackground>
             </TouchableOpacity>
 
-            <TouchableOpacity
-                style={styles.button2}
-                onPress={() => toTheDeck()}>
-                <Text style={styles.text3}>The Deck</Text>
+            <TouchableOpacity 
+                    onPress={() => toTheDeck()}>
+            <ImageBackground style = {styles.button2} source={require('../../../assets/thedeck.jpg')}>
+            <Text style={styles.text}> The Deck </Text>
+            </ImageBackground>
             </TouchableOpacity>
-
 
         </SafeAreaView>
 
