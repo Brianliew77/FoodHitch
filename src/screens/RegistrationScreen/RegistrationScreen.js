@@ -21,6 +21,10 @@ export default function RegistrationScreen({navigation}) {
             alert("Passwords don't match.")
             return
         }
+        if (Number(phoneNumber) <= 80000000) {
+            alert('Invalid phone number.')
+            return
+        }
         const auth = getAuth();
         const db = getFirestore();
         createUserWithEmailAndPassword(auth, email, password)
