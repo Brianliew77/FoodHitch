@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, TouchableOpacity, SafeAreaView } from 'react-native'
+import { Text, TouchableOpacity, SafeAreaView, ImageBackground } from 'react-native'
 import styles from './styles';
 
 
@@ -13,18 +13,21 @@ export default function DelivererHomeScreen({route, navigation}) {
         <SafeAreaView style={styles.container}>
 
             <Text style={styles.text2}>{'\n'}</Text>
-            
-            <TouchableOpacity
-                style={styles.button1}
-                onPress={() => onMakeNewReq()}>
-                <Text style={styles.text3}>Make New Request</Text>
-            </TouchableOpacity>
 
-            <TouchableOpacity
-                style={styles.button2}
-                onPress={() => onCheckCurrentReq()}>
-                <Text style={styles.text3}>Current Requests</Text>
-            </TouchableOpacity>
+            <TouchableOpacity 
+                    onPress={() => onMakeNewReq()}>
+            <ImageBackground style = {styles.button2} source={require('../../../assets/foodstall.jpg')}>
+            <Text style={styles.text}> Make New Request</Text>
+            </ImageBackground>
+            </TouchableOpacity>           
+            
+
+            <TouchableOpacity 
+                    onPress={() => onCheckCurrentReq()}>
+            <ImageBackground style = {styles.button2} source={require('../../../assets/foodstall2.jpg')}>
+            <Text style={styles.text}> Current Requests </Text>
+            </ImageBackground>
+            </TouchableOpacity>    
 
         </SafeAreaView>
 
