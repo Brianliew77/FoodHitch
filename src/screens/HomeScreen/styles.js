@@ -22,9 +22,25 @@ export default StyleSheet.create({
         width: 90,
         alignSelf: "center",
     },
+    profileImage:{
+        height:50,
+        width:50,
+        marginLeft:10,
+        borderRadius:30
+    },
     text2: {
         alignItems: 'center',
         textAlign: 'center',
+        fontWeight: '400',
+        color: '#FFFFFF',
+        fontSize: 14,
+        marginLeft: 80,
+        marginRight: 80,
+    },
+    textprofile: {
+        alignItems: 'center',
+        textAlign: 'center',
+        fontStyle: 'normal',
         fontWeight: '400',
         color: '#FFFFFF',
         fontSize: 14,
