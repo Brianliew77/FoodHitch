@@ -6,6 +6,12 @@ export default StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#393939'
     },
+    iconWrap: {
+        flexDirection:'row',
+        backgroundColor: '#393939',
+        alignItems: 'center',
+        marginTop:0
+    },
     scrollview: {
         backgroundColor: '#393939'
     },
@@ -60,6 +66,16 @@ export default StyleSheet.create({
         marginLeft: 30,
         marginRight: 30,
         marginTop: 10,
+        height: 48,
+        borderRadius: 5,
+        alignItems: "center",
+        justifyContent: 'center'
+    },
+    buttonIcon: {
+        backgroundColor: '#788eec',
+        marginLeft: 5,
+        marginRight: 5,
+        marginTop: 5,
         height: 48,
         borderRadius: 5,
         alignItems: "center",
