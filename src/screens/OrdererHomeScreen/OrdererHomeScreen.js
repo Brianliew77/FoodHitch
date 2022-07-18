@@ -44,9 +44,6 @@ export default function OrdererHomeScreen({navigation}) {
         <View style={styles.profileWrap}>
             <Text style={styles.welcomeText1}> Welcome</Text>
             <Text style={styles.welcomeText2}> {userName}!</Text>
-            <TouchableOpacity onPress={()=>{navigation.navigate("Profile")}}> 
-                <Image style={styles.profileImage} source={require('../../../assets/profile.png')}/>
-            </TouchableOpacity>
         </View>
         <TouchableOpacity 
                     onPress={() => onNewOrderPress()}>
