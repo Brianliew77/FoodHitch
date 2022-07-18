@@ -12,12 +12,12 @@ export default StyleSheet.create({
         marginTop:10
     },
     welcomeText1:{
-        fontSize:32,
+        fontSize:18,
         color:'white',
         
     },
     welcomeText2:{
-        fontSize:32,
+        fontSize:18,
         fontStyle:'italic',
         color: '#788eec',
         textAlign: "center",
