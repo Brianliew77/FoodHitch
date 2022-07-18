@@ -61,7 +61,7 @@ export default StyleSheet.create({
         justifyContent: 'center'
     },    
     welcomeText1:{
-        fontSize:32,
+        fontSize:18,
         color:'white',
         
     },
@@ -71,7 +71,7 @@ export default StyleSheet.create({
         marginTop:10
     },
     welcomeText2:{
-        fontSize:32,
+        fontSize:18,
         fontStyle:'italic',
         color: '#788eec',
         textAlign: "center",
