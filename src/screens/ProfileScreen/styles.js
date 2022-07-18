@@ -13,7 +13,6 @@ export default StyleSheet.create({
     },
     emailText:{
         color:'white',
-        alignSelf:'center'
     },
     welcomeText1:{
         fontSize:32,
@@ -52,14 +51,22 @@ export default StyleSheet.create({
         width: 90,
         alignSelf: "center",
     },
-    lineWrap:{
+    originalWrap:{
         flexDirection:'row',
-        alignItems:'stretch'
+        marginTop:10,
+        alignItems:'center'
     },
     logo2: {
         height: 40,
         width: 40,
         alignSelf: "center",
+        marginLeft: 20
+    },
+    logo3: {
+        height: 20,
+        width: 20,
+        alignSelf:'center',
+        marginLeft:10
     },
     text2: {
         alignItems: 'center',
@@ -112,12 +119,20 @@ export default StyleSheet.create({
         height: 48,
         borderRadius: 5,
         overflow: 'hidden',
-        backgroundColor: 'white',
+        backgroundColor: 'grey',
         marginTop: 10,
         marginBottom: 10,
-        marginLeft: 30,
-        marginRight: 30,
-        width:200,
+        width:150,
+        textAlign:'center'
+    },
+    input2: {
+        height: 48,
+        borderRadius: 5,
+        overflow: 'hidden',
+        backgroundColor: 'grey',
+        marginTop: 10,
+        marginBottom: 10,
+        width:180,
         textAlign:'center'
     }
 })

@@ -21,7 +21,7 @@ export default function HomeScreen({route, navigation}) {
             <Text style={styles.text2}>To start off, do you plan to order food (Orderer) or buy food? (Deliverer)</Text>
             <Image
                     style={styles.logo}
-                    source={require('../../../assets/icon.png')}
+                    source={require('../../../assets/foodcute.png')}
                 />
             <TouchableOpacity
                 style={styles.button1}

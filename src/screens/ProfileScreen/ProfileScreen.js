@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { Image, ImageBackground, Text, TextInput, TouchableOpacity, View, SafeAreaView } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, updatePassword, signInWithEmailAndPassword} from "firebase/auth";
 import { getFirestore, doc, getDoc, updateDoc } from "firebase/firestore";
 
 export default function ProfileScreen({navigation}) {
     const [fullName, setFullName] = useState('')
     const [changeName, setChangeName] = useState(false)
     const [password, setPassword] = useState('')
+    const [oldPassword, setOldPassword] = useState('')
     const [changePW, setChangePW] = useState(false)
     const [confirmPassword, setConfirmPassword] = useState('')
     const [phoneNumber, setPhoneNumber] = useState('')
@@ -35,8 +36,7 @@ export default function ProfileScreen({navigation}) {
             return
         }
         setChangeName(true)
-        const docRefName = doc(db,"user", auth.currentUser.email)
-        const docSnapName = getDoc(docRefName)
+
     }
     const onPasswordPress = () => {
         if(changeName||changeNum){
@@ -44,8 +44,6 @@ export default function ProfileScreen({navigation}) {
             return
         }
         setChangePW(true)
-        const docRefName = doc(db,"user", auth.currentUser.email)
-        const docSnapName = getDoc(docRefName)
     }
     const onNumberPress = () => {
         if(changePW||changeName){
@@ -53,23 +51,49 @@ export default function ProfileScreen({navigation}) {
             return
         }
         setChangeNum(true)
-        const docRefName = doc(db,"user", auth.currentUser.email)
-        const docSnapName = getDoc(docRefName)
+
     }
     const onConfirmNamePress = () => {
-        
+        const docRefName = doc(db,"user", auth.currentUser.email)
+        updateDoc(docRefName, {
+            'data.fullName': fullName
+          });
+        alert("Name changed!")
+        setChangeName(false)
     }
     const onConfirmNumPress = () => {
         if (Number(phoneNumber) <= 80000000) {
             alert('Invalid phone number.')
             return
-        }
+        } 
+        const docRefNum = doc(db,"user", auth.currentUser.email)
+        updateDoc(docRefNum, {
+            'data.phoneNumber': phoneNumber
+          });
+        alert("Phone Number changed!")
+        setChangeNum(false)
     }
     const onConfirmPasswordPress = () => {
         if (password !== confirmPassword) {
             alert("Passwords don't match.")
             return
         }
+        signInWithEmailAndPassword(auth, auth.currentUser.email, oldPassword)
+        .then((userCredential) => {
+            // Signed in 
+            const user = auth.currentUser;
+            updatePassword(user, password).then(() => {
+                alert("Password changed!")
+            }).catch((error) => {
+                alert(error.message)
+            });
+            setChangePW(false)
+        })
+        .catch((error) => {
+            const errorMessage = error.message;
+            alert(errorMessage)
+        });
+
     }
     return (
     <SafeAreaView style = {styles.container}>
@@ -83,7 +107,8 @@ export default function ProfileScreen({navigation}) {
                 />
 
                 { changeName ?
-                <View>
+                <View style={styles.originalWrap}>
+                <Text style={styles.emailText}>Name: </Text>
                 <TextInput
                     style={styles.input}
                     placeholder= {fullName}
@@ -94,13 +119,14 @@ export default function ProfileScreen({navigation}) {
                     autoCapitalize="none"
                 /> 
                 <TouchableOpacity onPress = {() => onConfirmNamePress()}>
-                    <Image style={styles.logo2}
-                    source={require('../../../assets/confirm.png')}/>
+                    <Image style={styles.logo3}
+                        source={require('../../../assets/confirm.png')}/>
                 </TouchableOpacity>
                 </View>
                 :
-                <View>
-                <Text styles={styles.emailText}> {fullName} </Text>
+                <View style={styles.originalWrap}>
+                <Text style={styles.emailText}>Name: </Text>
+                <Text style={styles.emailText}> {fullName} </Text>
                 <TouchableOpacity onPress = {() => onNamePress()}>
                     <Image style={styles.logo2}
                     source={require('../../../assets/edit2.png')}/>
@@ -108,12 +134,13 @@ export default function ProfileScreen({navigation}) {
                 </View>
                 }
 
-                <Text styles={styles.emailText}>
-                 {auth.currentUser.email}
+                <Text style={styles.emailText}>
+                 Email: {auth.currentUser.email}
                 </Text>
                 
                 { changeNum ?
-                <View>
+                <View style={styles.originalWrap}>
+                    <Text style={styles.emailText}>Phone Number: </Text>
                     <TextInput
                     style={styles.input}
                     placeholder={phoneNumber}
@@ -124,12 +151,13 @@ export default function ProfileScreen({navigation}) {
                     autoCapitalize="none"
                     />                 
                     <TouchableOpacity onPress = {() => onConfirmNumPress()}>
-                        <Image style={styles.logo2}
-                        source={require('../../../assets/edit2.png')}/>
+                        <Image style={styles.logo3}
+                        source={require('../../../assets/confirm.png')}/>
                     </TouchableOpacity>
                 </View>:
-                <View>
-                <Text styles={styles.emailText}>{phoneNumber}</Text>
+                <View style={styles.originalWrap}>
+                <Text style={styles.emailText}>Phone Number: </Text>
+                <Text style={styles.emailText}>{phoneNumber}</Text>
                 <TouchableOpacity onPress = {() => onNumberPress()}>
                 <Image style={styles.logo2}
                 source={require('../../../assets/edit2.png')}/>
@@ -140,7 +168,16 @@ export default function ProfileScreen({navigation}) {
                 { changePW ?
                 <View>
                     <TextInput
-                        style={styles.input}
+                        style={styles.input2}
+                        placeholderTextColor="#aaaaaa"
+                        placeholder="Old Password"
+                        onChangeText={(text) => setOldPassword(text)}
+                        value={oldPassword}
+                        underlineColorAndroid="transparent"
+                        autoCapitalize="none"
+                    />
+                    <TextInput
+                        style={styles.input2}
                         placeholderTextColor="#aaaaaa"
                         secureTextEntry
                         placeholder="New Password"
@@ -150,7 +187,7 @@ export default function ProfileScreen({navigation}) {
                         autoCapitalize="none"
                     />
                     <TextInput
-                        style={styles.input}
+                        style={styles.input2}
                         placeholderTextColor="#aaaaaa"
                         secureTextEntry
                         placeholder='Reconfirm New Password  '
@@ -161,11 +198,11 @@ export default function ProfileScreen({navigation}) {
                     />
                     <TouchableOpacity onPress = {() => onConfirmPasswordPress()}>
                         <Image style={styles.logo2}
-                        source={require('../../../assets/edit2.png')}/>
+                        source={require('../../../assets/confirm.png')}/>
                     </TouchableOpacity>
                 </View> :
-                <View>
-                <Text styles={styles.emailText}>Password: ***hidden***</Text>
+                <View style={styles.originalWrap}>
+                <Text style={styles.emailText}>Password: ***hidden***</Text>
                 <TouchableOpacity onPress = {() => onPasswordPress()}>
                     <Image style={styles.logo2}
                     source={require('../../../assets/edit2.png')}/>
