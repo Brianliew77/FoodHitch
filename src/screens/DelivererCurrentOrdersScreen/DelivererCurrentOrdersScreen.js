@@ -24,14 +24,15 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
         })
         )
     },[])
-    const Item = ({ item}) => (
+    const Item = ({ item }) => (
       <View>
+          <Text style={styles.text4Title}># ORDER #</Text>
           <Text style={styles.text4}>Orderer Email: {item[0]}</Text>
 
           <Text style={styles.text4}>Food Item 1: {item[2]}</Text>
           <Text style={styles.text4}>Food Item 2: {item[3]}</Text>
       
-          <Text style={styles.text4}>Total Price Of Order: {item[1]}</Text>
+          <Text style={styles.text4}>Total Price Of Order: ${item[1]}</Text>
       </View>
       );
     const renderItem = ({ item }) => {
