@@ -101,19 +101,11 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
               });           
             }
 
-    //need account for the case where there isnt any -> show an alert
-
     console.log(orderData)
 
     return (
     <SafeAreaView style={styles.container}>
     <Text style={styles.text2}>{'\n'}</Text>
-
-    <TouchableOpacity
-                    style={styles.button}
-                    onPress={() => onClickCheckEmail()}>
-                    <Text style={styles.buttonTitle}>Click Me To Show Your Orders!</Text>
-            </TouchableOpacity>
 
     <Text style={styles.text}>Your Current Orders Are:</Text>
 
@@ -126,13 +118,6 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
                 // refreshing={isFetching}
                 ListEmptyComponent={<Text style={styles.noRequest}>No requests found.</Text>}
             />
-{/* 
-    <Text style={styles.text4}>Orderer Email: {ordEmail}</Text>
-
-    <Text style={styles.text4}>Food Item 1: {foodie1}</Text>
-    <Text style={styles.text4}>Food Item 2: {foodie2}</Text>
-
-    <Text style={styles.text4}>Total Price Of Order: {totPrice}</Text> */}
 
     <Text style={styles.text4}>Update Orders Status:</Text>
             
@@ -157,3 +142,4 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
     </SafeAreaView>
     )
 }
+
