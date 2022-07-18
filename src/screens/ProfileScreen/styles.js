@@ -11,18 +11,16 @@ export default StyleSheet.create({
         backgroundColor: '#393939',
         marginTop:10
     },
+    emailText:{
+        color:'white',
+    },
     welcomeText1:{
         fontSize:32,
         color:'white',
+        marginTop: 30,
+        fontWeight:'700'
         
     },
-    welcomeText2:{
-        fontSize:32,
-        fontStyle:'italic',
-        color: '#788eec',
-        textAlign: "center",
-    },
-
     profileImage:{
         height:50,
         width:50,
@@ -39,11 +37,36 @@ export default StyleSheet.create({
         textAlign: "center",
         fontWeight: '700', 
     },
+    emailText : {
+        marginTop:10,
+        fontStyle: 'italic',
+        fontSize: 20,
+        color: 'white',
+        textAlign: "center",
+        fontWeight: '700', 
+    },
     logo: {
         margin:20,
         height: 90,
         width: 90,
         alignSelf: "center",
+    },
+    originalWrap:{
+        flexDirection:'row',
+        marginTop:10,
+        alignItems:'center'
+    },
+    logo2: {
+        height: 40,
+        width: 40,
+        alignSelf: "center",
+        marginLeft: 20
+    },
+    logo3: {
+        height: 20,
+        width: 20,
+        alignSelf:'center',
+        marginLeft:10
     },
     text2: {
         alignItems: 'center',
@@ -96,11 +119,20 @@ export default StyleSheet.create({
         height: 48,
         borderRadius: 5,
         overflow: 'hidden',
-        backgroundColor: 'white',
+        backgroundColor: 'grey',
         marginTop: 10,
         marginBottom: 10,
-        marginLeft: 30,
-        marginRight: 30,
-        paddingLeft: 16
+        width:150,
+        textAlign:'center'
+    },
+    input2: {
+        height: 48,
+        borderRadius: 5,
+        overflow: 'hidden',
+        backgroundColor: 'grey',
+        marginTop: 10,
+        marginBottom: 10,
+        width:180,
+        textAlign:'center'
     }
 })

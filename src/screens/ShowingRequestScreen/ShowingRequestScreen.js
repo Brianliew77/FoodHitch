@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect} from 'react'
 import { Text, SafeAreaView, TouchableOpacity } from 'react-native'
 import { getAuth} from "firebase/auth";
 import styles from './styles';
@@ -10,7 +10,9 @@ export default function ShowingRequestScreen({route, navigation}) {
     const [numOrder, onChangeNumOrder] = useState([])
     const [fPlace, onChangeFPlace] = useState([])
     const [dPlace, onChangeDPlace] = useState([])
-    
+    useEffect(()=>{
+      onClickCheckReq()
+    },[])
     const onClickCheckReq = () => {
         const db = getFirestore();
         const auth = getAuth();
@@ -46,11 +48,11 @@ export default function ShowingRequestScreen({route, navigation}) {
         <ScrollView style={styles.scrollview}>
             
             <Text style={styles.text2}>{'\n'}</Text>
-            <TouchableOpacity
+            {/* <TouchableOpacity
                     style={styles.button}
                     onPress={() => onClickCheckReq()}>
                     <Text style={styles.buttonTitle}>Click Me To Show Current Request Details</Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             <Text style={styles.text}>Your Current Request Details Are As Follows:</Text>
 

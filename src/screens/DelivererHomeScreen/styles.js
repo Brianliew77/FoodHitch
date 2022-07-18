@@ -59,6 +59,29 @@ export default StyleSheet.create({
         borderRadius: 2,
         alignItems: "center",
         justifyContent: 'center'
+    },    
+    welcomeText1:{
+        fontSize:32,
+        color:'white',
+        
+    },
+    profileWrap: {
+        flexDirection:'row',
+        backgroundColor: '#393939',
+        marginTop:10
+    },
+    welcomeText2:{
+        fontSize:32,
+        fontStyle:'italic',
+        color: '#788eec',
+        textAlign: "center",
+    },
+
+    profileImage:{
+        height:50,
+        width:50,
+        marginLeft:10,
+        borderRadius:30
     },
     button2: {
         margin: 10,

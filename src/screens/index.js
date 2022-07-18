@@ -17,3 +17,4 @@ export { default as DelivererDeliveryDetailsScreen } from './DelivererDeliveryDe
 export { default as ShowingDeliveryDetailsScreen } from './ShowingDeliveryDetailsScreen/ShowingDeliveryDetailsScreen'
 export { default as ShowingRequestScreen } from './ShowingRequestScreen/ShowingRequestScreen'
 export { default as DelivererCurrentOrdersScreen } from './DelivererCurrentOrdersScreen/DelivererCurrentOrdersScreen'
+export { default as ProfileScreen } from './ProfileScreen/ProfileScreen'

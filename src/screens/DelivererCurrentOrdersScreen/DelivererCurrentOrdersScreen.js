@@ -101,8 +101,6 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
               });           
             }
 
-  
-
     console.log(orderData)
 
     return (

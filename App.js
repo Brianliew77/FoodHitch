@@ -6,7 +6,7 @@ import { LoginScreen, HomeScreen, RegistrationScreen, ForgotPasswordScreen,
   ForgotFinalScreen, OrdererHomeScreen, NewOrderScreen1, NewOrderScreen2, 
   DelivererListScreen, CartScreen, PaymentScreen, ViewOrderScreen, 
   DelivererHomeScreen, ShowingRequestScreen, WhereToBuyFoodScreen, WhereToDeliverScreen, DelivererDeliveryDetailsScreen,
-ShowingDeliveryDetailsScreen, DelivererCurrentOrdersScreen} from './src/screens'
+ShowingDeliveryDetailsScreen, DelivererCurrentOrdersScreen, ProfileScreen} from './src/screens'
 
 import {decode, encode} from 'base-64'
 import { initializeApp } from "firebase/app";
@@ -92,6 +92,13 @@ export default function App() {
                 backgroundColor: '#FFAC4B'
                 }
                 }} />
+            <Stack.Screen name="Profile" component={ProfileScreen}
+              options={{
+              title: 'Profile',
+              headerStyle: {
+              backgroundColor: '#FFAC4B'
+              }
+              }} />
             <Stack.Screen name="OrdererHome" component={OrdererHomeScreen} />
             <Stack.Screen name="Delivering to?" component={NewOrderScreen1} />
             <Stack.Screen name="Deliverer List" component={DelivererListScreen} />
@@ -158,7 +165,14 @@ export default function App() {
               backgroundColor: '#FFAC4B'
               }
             }}/>
-            <Stack.Screen name="Registration" component={RegistrationScreen} />
+            <Stack.Screen name="Registration" component={RegistrationScreen}
+                          options={{
+                            title: 'Registration',
+                            headerStyle: {
+                            backgroundColor: '#FFAC4B'
+                            }
+                            }}
+            />
             <Stack.Screen name="Home">
             {props => <HomeScreen {...props} extraData={user} />}
             </Stack.Screen>
@@ -177,6 +191,13 @@ export default function App() {
                 backgroundColor: '#FFAC4B'
                 }
                 }} />
+            <Stack.Screen name="Profile" component={ProfileScreen}
+              options={{
+              title: 'Profile',
+              headerStyle: {
+              backgroundColor: '#FFAC4B'
+              }
+              }} />
             <Stack.Screen name="OrdererHome" component={OrdererHomeScreen} />
             <Stack.Screen name="Delivering to?" component={NewOrderScreen1} />
             <Stack.Screen name="Deliverer List" component={DelivererListScreen} />

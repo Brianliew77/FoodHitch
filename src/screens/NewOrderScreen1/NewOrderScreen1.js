@@ -13,19 +13,19 @@ export default function NewOrderScreen1({navigation}) {
         <KeyboardAwareScrollView>
         <TouchableOpacity 
                     onPress={() => onRHPress()}>
-            <ImageBackground style = {styles.button2} source={require('../../../assets/hawker1.jpg')}>
+            <ImageBackground style = {styles.button2} source={require('../../../assets/rh.jpeg')}>
             <Text style={styles.text}> Raffles Hall</Text>
             </ImageBackground>
         </TouchableOpacity>
         <TouchableOpacity 
                     onPress={() => onKRPress()}>
-            <ImageBackground style = {styles.button2} source={require('../../../assets/hawker2.jpg')}>
+            <ImageBackground style = {styles.button2} source={require('../../../assets/krhall.jpeg')}>
             <Text style={styles.text}> Kent Ridge Hall</Text>
             </ImageBackground>
         </TouchableOpacity>
         <TouchableOpacity 
                     onPress={() => onPGPRPress()}>
-            <ImageBackground style = {styles.button2} source={require('../../../assets/adaptive-icon.png')}>
+            <ImageBackground style = {styles.button2} source={require('../../../assets/kevii.jpg')}>
             <Text style={styles.text}> KEVII Hall</Text>
             </ImageBackground>
         </TouchableOpacity>
