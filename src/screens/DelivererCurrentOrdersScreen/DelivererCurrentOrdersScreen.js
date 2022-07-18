@@ -8,7 +8,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 export default function DelivererCurrentOrdersScreen({route, navigation}) {
 
-
+//for phone number
     const [orderData, onChangeOrderData] = useState([])
     useEffect(()=>{
         const db = getFirestore();
@@ -120,25 +120,25 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
             />
 
     <Text style={styles.text4}>Update Orders Status:</Text>
-            
+    <View style={styles.iconWrap}>
             <TouchableOpacity
-                    style={styles.button}
+                    style={styles.buttonIcon}
                     onPress={() => onPressisPending()}>
                     <Text style={styles.buttonTitle}>Order Pending</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-                    style={styles.button}
+                    style={styles.buttonIcon}
                     onPress={() => onPressisOnTheWay()}>
                     <Text style={styles.buttonTitle}>Order On The Way</Text>
             </TouchableOpacity>
 
             <TouchableOpacity
-                    style={styles.button}
+                    style={styles.buttonIcon}
                     onPress={() => onPressisDelivered()}>
                     <Text style={styles.buttonTitle}>Order Delivered</Text>
             </TouchableOpacity>
-
+      </View>
     </SafeAreaView>
     )
 }

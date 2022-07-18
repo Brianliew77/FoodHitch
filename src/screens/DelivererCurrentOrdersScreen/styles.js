@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react'
 import { Text, SafeAreaView, TouchableOpacity, FlatList, View} from 'react-native'
 import { getAuth} from "firebase/auth";
@@ -8,7 +7,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 export default function DelivererCurrentOrdersScreen({route, navigation}) {
 
-//for phone number
     const [orderData, onChangeOrderData] = useState([])
     useEffect(()=>{
         const db = getFirestore();
