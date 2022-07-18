@@ -20,7 +20,7 @@ export default function HomeScreen({route, navigation}) {
             <Text style={styles.text}>Let's go!</Text>
             <Text style={styles.text2}>To start off, do you plan to order food (Orderer) or buy food? (Deliverer)</Text>
             <Text style={styles.text2}>{'\n'}</Text>
-            <Text style={styles.textprofile}>Click Icon To View Profile</Text>
+            <Text style={styles.textprofile}>Click Icon To View Your Profile</Text>
 
             <TouchableOpacity onPress={()=>{navigation.navigate("Profile")}}> 
                 <Image style={styles.logo} source={require('../../../assets/profile.png')}/>
