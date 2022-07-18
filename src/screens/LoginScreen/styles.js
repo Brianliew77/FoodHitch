@@ -15,6 +15,12 @@ export default StyleSheet.create({
         alignSelf: "center",
         margin: 30
     },
+    logo1: {
+        marginTop: 38,
+        height: 120,
+        width: 120,
+        alignSelf: "center",
+    },
     input: {
         height: 48,
         borderRadius: 5,
