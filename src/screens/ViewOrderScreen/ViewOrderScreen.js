@@ -9,12 +9,14 @@ export default function ViewOrderScreen({navigation, route}) {
     const {delivererEmail,delivererName,delivererNum, totalPrice} = route.params
     const db = getFirestore();
     const auth = getAuth();
+    const [orderCheck, setOrderCheck] = useState(null)
     const [foodBought,setFoodBought] = useState([])
     const [deliveryStatus,setStatus] = useState("")
     const [email, setEmail] = useState("")
     const [name, setName] = useState("")
     const [num, setNum] = useState("")
     const [price, setPrice] = useState(0)
+
 
     const onPressCheckStatus = () => {
         const reqRef = collection(db, "Request");
@@ -31,6 +33,7 @@ export default function ViewOrderScreen({navigation, route}) {
         const docSnap = getDoc(docRef)
         .then(docSnap => {
             if (docSnap.exists()) {
+                setOrderCheck("Order created")
                 setEmail(docSnap.data().delivererEmail)
                 setPrice(docSnap.data().totalPrice)
                 setEmail(docSnap.data().delivererEmail)
@@ -77,7 +80,22 @@ export default function ViewOrderScreen({navigation, route}) {
                     deleteDoc(doc(db, "Request", email));
                     deleteDoc(doc(db,"Order",auth.currentUser.email));
                     navigation.navigate("OrdererHome");
+                } },
+                { text: "Yes & Report Issue", onPress: () => {
+                    console.log('deleted request and order 2')
+
+                    const docRef = doc(db, "user", email)
+                    const docSnap = getDoc(docRef)
+                    .then(docSnap => {
+                        if (docSnap.exists()) {
+                            console.log("getting number 1 " + docSnap.data().data.phoneNumber);
+                            alert("Contact Deliverer @ " + docSnap.data().data.phoneNumber)
+                        }})
+                    deleteDoc(doc(db, "Request", email));
+                    deleteDoc(doc(db,"Order",auth.currentUser.email));
+                    navigation.navigate("OrdererHome");
                 } }
+
             ])
         }
     },[deliveryStatus])
@@ -102,8 +120,9 @@ export default function ViewOrderScreen({navigation, route}) {
     const renderItem = ({ item }) => (
     <Item title={item} />
     );
-    
+    if (orderCheck !== null) {
     return (
+        
         <SafeAreaView style={styles.container}>
             <Text style={styles.text}> Deliverer Details: </Text>
             <Text style={[styles.text2]}> Name : {name} </Text>
@@ -118,13 +137,30 @@ export default function ViewOrderScreen({navigation, route}) {
             <TouchableOpacity
                     style={styles.button}
                     onPress={()=>onPressCheckStatus()}>
-                    <Text style={styles.buttonTitle}>refresh Status</Text>
+                    <Text style={styles.buttonTitle}>Refresh Status</Text>
                 </TouchableOpacity>
             <TouchableOpacity
                     style={styles.button}
                     onPress={() => {navigation.navigate("OrdererHome")}}>
-                    <Text style={styles.buttonTitle}>return home</Text>
+                    <Text style={styles.buttonTitle}>Return home!</Text>
                 </TouchableOpacity>
         </SafeAreaView>
     )
+    } else {
+        return (
+            <SafeAreaView  style={styles.container}>
+                <Text style={styles.noOrder}> No current orders! Return to homepage or create one now! </Text>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => {navigation.navigate("OrdererHome")}}>
+                    <Text style={styles.buttonTitle}>Return home!</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.button}
+                    onPress={() => {navigation.navigate("Delivering to?")}}>
+                    <Text style={styles.buttonTitle}>Create new order!</Text>
+                </TouchableOpacity>
+            </SafeAreaView>
+        )
+    }
 }
