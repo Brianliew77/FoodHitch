@@ -37,6 +37,7 @@ export default StyleSheet.create({
         backgroundColor:'grey',
         paddingHorizontal:18
     },
+    noOrder:{textAlign:'center',fontSize:32, color:'white',marginTop:20},
     price : {
         marginTop:30,
         fontStyle: 'normal',
@@ -92,5 +93,8 @@ export default StyleSheet.create({
         marginLeft: 30,
         marginRight: 30,
         paddingLeft: 16
+    },
+    buttonTitle:{
+        fontSize:20
     }
 })
