@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Image, Text, TextInput, TouchableOpacity, View, SafeAreaView, FlatList, StatusBar, StyleSheet } from 'react-native'
+import { Image, Text, Alert, TextInput, TouchableOpacity, View, SafeAreaView, FlatList, StatusBar, StyleSheet } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 import { getAuth } from "firebase/auth";
@@ -12,6 +12,7 @@ export default function DelivererListScreen({navigation, route}) {
     const [DATA, setDATA] = useState([])
     const db = getFirestore();
     const [isFetching, setIsFetching] = useState(false);
+
     useEffect(()=>{
         console.log("DATA")
         const reqRef = collection(db, "Request");
@@ -53,7 +54,16 @@ export default function DelivererListScreen({navigation, route}) {
     const onUpdatePress = () => {
         console.log(selectedId)
         if (selectedId) {
-            navigation.navigate('Menu', {delivererEmail:selectedId})
+            Alert.alert( "Notice!"
+            , "You will not be able to navigate back after this point! Do you want to continue?",
+            [
+                { text: "Yes", onPress: () => navigation.navigate('Menu', {delivererEmail:selectedId})
+                },
+                { text: "No", onPress: () => 
+                    console.log('return back to screen')
+                }
+
+            ])
         } else {
             alert("You have not selected any request!")
         }

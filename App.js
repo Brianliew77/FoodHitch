@@ -102,9 +102,18 @@ export default function App() {
             <Stack.Screen name="OrdererHome" component={OrdererHomeScreen} />
             <Stack.Screen name="Delivering to?" component={NewOrderScreen1} />
             <Stack.Screen name="Deliverer List" component={DelivererListScreen} />
-            <Stack.Screen name="Menu" component={NewOrderScreen2} />
-            <Stack.Screen name="Food Cart" component={CartScreen} />
-            <Stack.Screen name="Payment" component={PaymentScreen} />
+            <Stack.Screen name="Menu" component={NewOrderScreen2}               
+              options={{
+                headerBackVisible:false
+                }}/>
+            <Stack.Screen name="Food Cart" component={CartScreen}
+              options={{
+                headerBackVisible:false
+                }}/>
+            <Stack.Screen name="Payment" component={PaymentScreen}
+              options={{
+                headerBackVisible:false
+                }}/>
             <Stack.Screen name="View Order" component={ViewOrderScreen} />
             <Stack.Screen name="DelivererHome" component={DelivererHomeScreen}
               options={{
@@ -201,9 +210,18 @@ export default function App() {
             <Stack.Screen name="OrdererHome" component={OrdererHomeScreen} />
             <Stack.Screen name="Delivering to?" component={NewOrderScreen1} />
             <Stack.Screen name="Deliverer List" component={DelivererListScreen} />
-            <Stack.Screen name="Menu" component={NewOrderScreen2} />
-            <Stack.Screen name="Food Cart" component={CartScreen} />
-            <Stack.Screen name="Payment" component={PaymentScreen} />
+            <Stack.Screen name="Menu" component={NewOrderScreen2} 
+              options={{
+                headerBackVisible:false
+                }}/>
+            <Stack.Screen name="Food Cart" component={CartScreen} 
+              options={{
+                headerBackVisible:false
+                }}/>
+            <Stack.Screen name="Payment" component={PaymentScreen} 
+               options={{
+                headerBackVisible:false
+                }}/>
             <Stack.Screen name="View Order" component={ViewOrderScreen} />
             <Stack.Screen name="DelivererHome" component={DelivererHomeScreen}
               options={{

@@ -133,8 +133,13 @@ export default function NewOrderScreen2({navigation, route}) {
 
     const onUpdatePress = () => {
         console.log(delivererEmail)
+        if (selectedId) {
         navigation.navigate('Food Cart',{addFoodPrice: Number(addFoodPrice), addFood:selectedId, delivererEmail:delivererEmail})
+        } else {
+            alert("Please select an item!")
         }
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.text2}> Ordering from ◦</Text>
