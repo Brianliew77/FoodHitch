@@ -8,8 +8,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 export default function DelivererCurrentOrdersScreen({route, navigation}) {
 
-    const [orderData, onChangeOrderData] = useState([])
+    const [orderData, onChangeOrderData] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
+    const [ordererNumber,setOrdererEmail] = useState('');
 
     useEffect(()=>{
         const db = getFirestore();
@@ -18,13 +19,26 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
         const reqRef = collection(db, "Order");
         const q = query(reqRef, where("delivererEmail", "==", auth.currentUser.email));
         const querySnapshot = getDocs(q).then( querySnapshot =>
-        querySnapshot.forEach((doc) => {
-          if (orderData.some(e => e[0] === doc.data().ordererEmail)) {
+        querySnapshot.forEach((docNew) => {
+          if (orderData.some(e => e[0] === docNew.data().ordererEmail)) {
             console.log("order data already contains this docs 1")
           } else {
-            onChangeOrderData(prevState=> {return [...prevState, 
-              [doc.data().ordererEmail,doc.data().totalPrice,
-                doc.data().food.food1,doc.data().food.food2]]})
+            const docRef1 = doc(db, "user", docNew.data().ordererEmail)
+            const docSnap1 = getDoc(docRef1)
+            .then(docSnap => {
+                if (docSnap.exists()) {
+                    console.log("get number");
+                    onChangeOrderData(prevState=> {return [...prevState, 
+                    [docNew.data().ordererEmail,docNew.data().totalPrice,
+                    docNew.data().food.food1,docNew.data().food.food2
+                    ,docSnap.data().data.phoneNumber]]
+                    })
+                } else {
+                    console.log("No such document!");
+                    alert("No such account!")
+                }
+                })
+
           }
         }))
 
@@ -49,13 +63,26 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
       })) {
           console.log("order data already contains this docs 2")
         } else {
-          onChangeOrderData(prevState=> {return [...prevState, 
-            [doc.data().ordererEmail,doc.data().totalPrice,
-              doc.data().food.food1,doc.data().food.food2]]})
-          }
-      }))
+          const docRef1 = doc(db, "user", docNew.data().ordererEmail)
+          const docSnap1 = getDoc(docRef1)
+          .then(docSnap => {
+              if (docSnap.exists()) {
+                  console.log("get number");
+                  onChangeOrderData(prevState=> {return [...prevState, 
+                  [docNew.data().ordererEmail,docNew.data().totalPrice,
+                  docNew.data().food.food1,docNew.data().food.food2
+                  ,docSnap.data().data.phoneNumber]]
+                  })
+              } else {
+                  console.log("No such document!");
+                  alert("No such account!")
+              }
+              })
+            }
       setIsFetching(false)
-    }
+    })
+    )
+  }
 
 
     const Item = ({ item }) => (
