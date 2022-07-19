@@ -8,8 +8,9 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 export default function DelivererCurrentOrdersScreen({route, navigation}) {
 
-//for phone number
     const [orderData, onChangeOrderData] = useState([])
+    const [isFetching, setIsFetching] = useState(false);
+
     useEffect(()=>{
         const db = getFirestore();
         const auth = getAuth();
@@ -23,10 +24,34 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
               doc.data().food.food1,doc.data().food.food2]])
         })
         )
+
     },[])
+
+    const onRefreshPress = () => {
+      setIsFetching(true)
+
+      const db = getFirestore();
+      const auth = getAuth();
+
+      const reqRef = collection(db, "Order");
+      const q = query(reqRef, where("delivererEmail", "==", auth.currentUser.email));
+      const querySnapshot = getDocs(q).then( querySnapshot =>
+      querySnapshot.forEach((doc) => {
+        console.log(doc.data())
+        onChangeOrderData(prevState=>[...prevState, 
+          [doc.data().ordererEmail,doc.data().totalPrice,
+            doc.data().food.food1,doc.data().food.food2]])
+      }))
+      setIsFetching(false)
+
+    }
+
+
     const Item = ({ item }) => (
       <View>
-          <Text style={styles.text4Title}># ORDER #</Text>
+          <Text style={styles.text4Title}># ORDER #</Text> 
+
+          <Text style={styles.text4}>Orderer Phone Number: {item[4]}</Text>
           <Text style={styles.text4}>Orderer Email: {item[0]}</Text>
 
           <Text style={styles.text4}>Food Item 1: {item[2]}</Text>
@@ -115,8 +140,8 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
                 data={orderData}
                 renderItem={renderItem}
                 keyExtractor={(item) => item[0]}
-                // onRefresh={onRefreshPress}
-                // refreshing={isFetching}
+                onRefresh={onRefreshPress}
+                refreshing={isFetching}
                 ListEmptyComponent={<Text style={styles.noRequest}>No requests found.</Text>}
             />
 
@@ -143,4 +168,5 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
     </SafeAreaView>
     )
 }
+
 
