@@ -80,7 +80,22 @@ export default function ViewOrderScreen({navigation, route}) {
                     deleteDoc(doc(db, "Request", email));
                     deleteDoc(doc(db,"Order",auth.currentUser.email));
                     navigation.navigate("OrdererHome");
+                } },
+                { text: "Yes & Report Issue", onPress: () => {
+                    console.log('deleted request and order 2')
+
+                    const docRef = doc(db, "user", email)
+                    const docSnap = getDoc(docRef)
+                    .then(docSnap => {
+                        if (docSnap.exists()) {
+                            console.log("getting number 1 " + docSnap.data().data.phoneNumber);
+                            alert("Contact Deliverer @ " + docSnap.data().data.phoneNumber)
+                        }})
+                    deleteDoc(doc(db, "Request", email));
+                    deleteDoc(doc(db,"Order",auth.currentUser.email));
+                    navigation.navigate("OrdererHome");
                 } }
+
             ])
         }
     },[deliveryStatus])
