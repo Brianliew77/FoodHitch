@@ -19,7 +19,7 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
         const q = query(reqRef, where("delivererEmail", "==", auth.currentUser.email));
         const querySnapshot = getDocs(q).then( querySnapshot =>
         querySnapshot.forEach((doc) => {
-          if (orderData.some(e => e.ordererEmail === doc.data().ordererEmail)) {
+          if (orderData.some(e => e[0] === doc.data().ordererEmail)) {
             console.log("order data already contains this docs 1")
           } else {
             onChangeOrderData(prevState=> {return [...prevState, 
@@ -42,7 +42,7 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
       querySnapshot.forEach((doc) => {
         console.log(doc.data())
         if (orderData.some(e => {
-          if (e.ordererEmail === doc.data().ordererEmail) {
+          if (e[0] === doc.data().ordererEmail) {
             return true
           }
           return false
