@@ -29,6 +29,16 @@ export default StyleSheet.create({
         alignItems: 'flex-end',
         textAlign: "center", 
     },
+    textNumber : {
+        marginTop:30,
+        fontStyle: '700',
+        fontSize: 28,
+        color: '#FFFFFF',
+        display: 'flex',
+        alignItems: 'flex-end',
+        textAlign: "center",
+        fontStyle:'italic'
+    },
     button: {
         backgroundColor: '#788eec',
         marginTop: 10,

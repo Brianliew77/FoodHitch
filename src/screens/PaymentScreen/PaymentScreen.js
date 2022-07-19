@@ -121,12 +121,13 @@ export default function PaymentScreen({navigation, route}) {
     return (
         <SafeAreaView style={styles.container}>
             <Text style={styles.text}> Make Payment to confirm your order! </Text>
-            <Text style={[styles.text2]}> Paynow to {delivererName} at {delivererNum}</Text>
+            <Text style={[styles.text2]}> Paynow to {delivererName} at</Text>
+            <Text style={[styles.textNumber]}> {delivererNum}</Text>
             <Text style={[styles.text2]}> Order total: $ {totalPrice}</Text>
             <TouchableOpacity style = {styles.button}
                 onPress={() => onChoosePress()}
             >
-                <Text style={styles.buttonTitle}> Choose Image</Text>
+                <Text style={styles.buttonTitle}> Choose Image to upload!</Text>
             </TouchableOpacity>
             
             {image !== null ? (
@@ -148,7 +149,7 @@ export default function PaymentScreen({navigation, route}) {
             <TouchableOpacity style = {styles.button}
                 onPress={() => onUpdatePress()}
             >
-                <Text style={styles.buttonTitle}> Continue</Text>
+                <Text style={styles.buttonTitle}> Move to order summary..</Text>
             </TouchableOpacity>
         </SafeAreaView>
     )

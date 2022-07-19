@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View, SafeAreaView, FlatList, StatusBar, StyleSheet } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
-import { getDocs, getDoc,doc, setDoc,  collection, updateDoc, where, getFirestore } from "firebase/firestore";
+import { getDocs, getDoc,doc, setDoc, deleteDoc, collection, updateDoc, where, getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 
@@ -15,8 +15,7 @@ export default function CartScreen({navigation,route}) {
     const db = getFirestore();
     const auth = getAuth();
     const [foodBought,setFoodBought] = useState([])
-    const [counter, setCounter] = useState("")
-    
+    const [counter, setCounter] = useState(0)
 
     useEffect(()=>{
         const docRef = doc(db, "Order", auth.currentUser.email)
@@ -27,14 +26,16 @@ export default function CartScreen({navigation,route}) {
                 updateDoc(docRef, {
                     "food.food2":addFood, "totalPrice": Number(docSnap.data().totalPrice) + Number(addFoodPrice)
                 })
+                setCounter(1)
                 setTotalDisplay(Number(docSnap.data().totalPrice) + Number(addFoodPrice))
                 console.log("updated log")
-                setCounter("start2")
               } else {
                   console.log("too many food")
                   setTotalDisplay(Number(docSnap.data().totalPrice))
-                  alert("You can only choose up to 2 food items!")
-                  //alert("You can only choose up to 2 food items!")
+                  setCounter(1)
+                  if (docSnap.data().food.food2 != ""){
+                      alert("You can only choose up to 2 food items!")
+                  }
               }
               
             } else {
@@ -50,7 +51,7 @@ export default function CartScreen({navigation,route}) {
                     , { merge: true })
                     .then(() => {
                         console.log('made new order')
-                        setCounter("start")
+                        setCounter(1)
                         setTotalDisplay(Number(addFoodPrice))
                     })
                     .catch((error) => {
@@ -59,7 +60,7 @@ export default function CartScreen({navigation,route}) {
             }
         })
         
-    },[totalDisplay])
+    },[])
 
     const [totalDisplay, setTotalDisplay] = useState(0);
 
@@ -70,48 +71,26 @@ export default function CartScreen({navigation,route}) {
             .then(docSnap => {
                 if (docSnap.exists()) {
                 //setTotalDisplay(Number(docSnap.data().totalPrice))
-                if (foodBought.some(element=>{
-                    if (element===docSnap.data().food.food1)  {
-                        return true
-                    }
-                    return false
-                }) && docSnap.data().food.food2 != "") {
-                    //food1 alrdy inside data
-                    if (docSnap.data().food.food2 === "") {
-                        console.log('food1 in data food2 dont exist')
-                        //food1 alrdy in data and food2 dont exist
-                        setFoodBought(prevState=>{
-                            return [{
-                                id: '1',
-                                title: docSnap.data().food.food1,
-                              }]})
-                    } else {
-                        //food1 in and food2 exist
-                        console.log('food1 in data and food2 exist')
-                        setFoodBought(prevState=>{
-                            return [{
-                                id: '1',
-                                title: docSnap.data().food.food1,
-                              }, {
-                                id: '2',
-                                title: docSnap.data().food.food2,
-                              }]})
-                    }
-                } else {
-                    //food1 not in data and food2 is not empty
-                    console.log('food1 not in data and food2 exist')
+                if (docSnap.data().food.food2 != "") {
                     setFoodBought(prevState=>{
                         return [{
                             id: '1',
                             title: docSnap.data().food.food1,
-                          }, {
+                        }, {
                             id: '2',
                             title: docSnap.data().food.food2,
+                        }]})
+                } else {
+                    setFoodBought(prevState=>{
+                        return [{
+                            id: '1',
+                            title: docSnap.data().food.food1,
                           }]})
-                } 
+                }
+
             }
             })       
-    },[totalDisplay])
+    },[counter])
 
     console.log("todisplay")
     console.log(totalDisplay)
@@ -121,6 +100,7 @@ export default function CartScreen({navigation,route}) {
     const Item = ({ title }) => (
         <View style={styles.item}>
           <Text style={styles.title}>{title}</Text>
+
         </View>
       );
     const renderItem = ({ item }) => (
@@ -134,7 +114,10 @@ export default function CartScreen({navigation,route}) {
         //add food to firebase order cart
         navigation.navigate('Menu', {delivererEmail:delivererEmail})//CHANGE when add to firebase this is request id
         }
-    
+    const onDeletePress = () => { 
+        deleteDoc(doc(db,"Order",auth.currentUser.email));
+        navigation.navigate("Menu", {delivererEmail:delivererEmail});
+    }
     return (
         <SafeAreaView style={styles.container}>
             <View style={styles.containerWrap}>
@@ -152,7 +135,11 @@ export default function CartScreen({navigation,route}) {
                 >
                     <Text style={styles.buttonText}> Add more items</Text>
                 </TouchableOpacity>
-
+                <TouchableOpacity style = {styles.button}
+                    onPress={()=>{onDeletePress()}}
+                >
+                <Text style={styles.buttonText}> Reset Cart</Text>
+                </TouchableOpacity>
                 <Text style={[styles.priceDisplay]}> Total Price: $ {totalDisplay}</Text>
 
                 <TouchableOpacity style = {styles.button}
