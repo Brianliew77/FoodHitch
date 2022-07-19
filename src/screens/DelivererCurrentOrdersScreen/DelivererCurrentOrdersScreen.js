@@ -19,11 +19,14 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
         const q = query(reqRef, where("delivererEmail", "==", auth.currentUser.email));
         const querySnapshot = getDocs(q).then( querySnapshot =>
         querySnapshot.forEach((doc) => {
-          onChangeOrderData(prevState=>[...prevState, 
-            [doc.data().ordererEmail,doc.data().totalPrice,
-              doc.data().food.food1,doc.data().food.food2]])
-        })
-        )
+          if (orderData.some(e => e.ordererEmail === doc.data().ordererEmail)) {
+            console.log("order data already contains this docs 1")
+          } else {
+            onChangeOrderData(prevState=> {return [...prevState, 
+              [doc.data().ordererEmail,doc.data().totalPrice,
+                doc.data().food.food1,doc.data().food.food2]]})
+          }
+        }))
 
     },[])
 
@@ -38,12 +41,20 @@ export default function DelivererCurrentOrdersScreen({route, navigation}) {
       const querySnapshot = getDocs(q).then( querySnapshot =>
       querySnapshot.forEach((doc) => {
         console.log(doc.data())
-        onChangeOrderData(prevState=>[...prevState, 
-          [doc.data().ordererEmail,doc.data().totalPrice,
-            doc.data().food.food1,doc.data().food.food2]])
+        if (orderData.some(e => {
+          if (e.ordererEmail === doc.data().ordererEmail) {
+            return true
+          }
+          return false
+      })) {
+          console.log("order data already contains this docs 2")
+        } else {
+          onChangeOrderData(prevState=> {return [...prevState, 
+            [doc.data().ordererEmail,doc.data().totalPrice,
+              doc.data().food.food1,doc.data().food.food2]]})
+          }
       }))
       setIsFetching(false)
-
     }
 
 
