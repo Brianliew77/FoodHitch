@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Image, Text, TextInput, TouchableOpacity, View, SafeAreaView, FlatList, StatusBar, StyleSheet } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
-import { getDocs, getDoc,doc, setDoc, deleteDoc, collection, updateDoc, where, getFirestore } from "firebase/firestore";
+import { getDocs, getDoc,doc, setDoc, deleteDoc, collection, updateDoc, where, getFirestore,increment } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
 
 
@@ -57,6 +57,8 @@ export default function CartScreen({navigation,route}) {
                     .catch((error) => {
                         alert(error)
                     });
+                updateDoc(doc(db,"Request", delivererEmail),
+                    {'capacityReached': increment(1)})
             }
         })
         

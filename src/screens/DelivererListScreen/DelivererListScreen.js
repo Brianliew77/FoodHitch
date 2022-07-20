@@ -3,7 +3,7 @@ import { Image, Text, Alert, TextInput, TouchableOpacity, View, SafeAreaView, Fl
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import styles from './styles';
 import { getAuth } from "firebase/auth";
-import { getDocs, onSnapshot,  collection, query, where, getFirestore } from "firebase/firestore";
+import { getDocs, onSnapshot, updateDoc, collection, query, where, getFirestore } from "firebase/firestore";
 
 
 export default function DelivererListScreen({navigation, route}) {
@@ -19,14 +19,13 @@ export default function DelivererListScreen({navigation, route}) {
         const q = query(reqRef, where("deliveryPlace", "==", CollectAt));
         const querySnapshot = getDocs(q).then( querySnapshot =>
         querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            // console.log(doc.data())
-            // console.log("test")
-            // console.log(DATA)
+
             if (DATA.some(e => e.delivererEmail === doc.data().delivererEmail)) {
                 console.log("DATA contains this document")
             } else {
-                setDATA((prevState)=> {return [...prevState, doc.data()]})
+                if (Number(doc.data().capacityReached) < Number(doc.data().capacity)) {
+                    setDATA((prevState)=> {return [...prevState, doc.data()]})
+                }
             }
         }))
     },[])
@@ -38,13 +37,9 @@ export default function DelivererListScreen({navigation, route}) {
         const querySnapshot = getDocs(q).then( querySnapshot =>
         querySnapshot.forEach((doc) => {
             // doc.data() is never undefined for query doc snapshots
-            const reqRef2 = collection(db, "Order");
-            const q2 = query(reqRef2, where("delivererEmail", "==", doc.data().delivererEmail));
-            const querySnapshot2 = getDocs(q2).then( querySnapshot2 =>
-                querySnapshot2.forEach((doc2)=>{
-                    counter += 1
-                }))
+            
             console.log(doc.data())
+            console.log('reach')
             if (DATA.some(element=>{
                 if (element.delivererEmail===doc.data().delivererEmail) {
                     return true
@@ -53,8 +48,8 @@ export default function DelivererListScreen({navigation, route}) {
             })) {
                 console.log("exist in DATA le")
             } else {
-                if (counter < doc.data().capacity) {
-                    setDATA((prevState)=> {return [...prevState, doc.data()]})
+                if (doc.data().capacityReached < doc.data().capacity) {
+                setDATA((prevState)=> {return [...prevState, doc.data()]})
                 }
             }
         }))

@@ -23,7 +23,8 @@ export default function DelivererDeliveryDetails({route, navigation}) {
             ETA,
             capacity,
             deliveryStatus,
-            delivererEmail:auth.currentUser.email
+            delivererEmail:auth.currentUser.email,
+            capacityReached:0
         };
 
         const data3 = {
