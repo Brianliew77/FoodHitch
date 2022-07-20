@@ -28,7 +28,7 @@ export default function LoginScreen({navigation}) {
           .catch((error) => {
             const errorCode = error.code;
             const errorMessage = error.message;
-            alert(errorMessage)
+            alert("Wrong email or password! Please try again.")
           });
     }
     
@@ -38,7 +38,7 @@ export default function LoginScreen({navigation}) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <KeyboardAwareScrollView
+            <View
                 style={{ flex: 1, width: '100%' }}
                 keyboardShouldPersistTaps="always">
                                 <Image
@@ -82,7 +82,7 @@ export default function LoginScreen({navigation}) {
                             Forgot password?
                         </Text>
                 </View>
-            </KeyboardAwareScrollView>
+            </View>
         </SafeAreaView>
     )
 }
