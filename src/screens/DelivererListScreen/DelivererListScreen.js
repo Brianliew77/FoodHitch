@@ -48,7 +48,7 @@ export default function DelivererListScreen({navigation, route}) {
             })) {
                 console.log("exist in DATA le")
             } else {
-                if (doc.data().capacityReached < doc.data().capacity) {
+                if (Number(doc.data().capacityReached) < Number(doc.data().capacity)) {
                 setDATA((prevState)=> {return [...prevState, doc.data()]})
                 }
             }

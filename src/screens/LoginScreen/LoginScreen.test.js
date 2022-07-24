@@ -1,11 +1,11 @@
 export { default as LoginScreen } from './LoginScreen'
 import React from "react";
-import { render, screen, fireEvent } from '@testing-library/react-native';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 import { LoginScreen } from '..';
 import { initializeApp } from "firebase/app";
 import { getFirestore, initializeFirestore, doc, getDoc } from "firebase/firestore";
 import { Alert } from 'react-native';
-import { getAuth } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
 
 const firebaseConfig = {
@@ -22,16 +22,15 @@ const firebaseConfig = {
     experimentalForceLongPolling: true,
   });
 //login to firebase
-test('login to firebase', ()=>{
+test('Able to input password and email for login', async ()=>{
     jest.spyOn(Alert, 'alert');
-    const {getByPlaceholderText, getByText} = render(<LoginScreen/>)
-    const input = getByPlaceholderText('E-mail')
-    const loginButton = getByText('Log in')
-    const input2 = getByPlaceholderText('Password')
-    fireEvent.changeText(input, 'test1@gmail.com')
-    fireEvent.changeText(input2, 'wrong password')
-    fireEvent.press(loginButton)
-    const auth = getAuth()
-    expect(auth.currentUser).not.toBeNull()
+    render(<LoginScreen/>)
+    // fireEvent.press(screen.getByText('Log in'))
+    const loginButton = screen.getByText('Log in')
+    const passwordInput = screen.getByPlaceholderText('Password')
+    const emailInput = screen.getByPlaceholderText('E-mail')
+    fireEvent.changeText(emailInput, 'test1@gmail.com')
+    fireEvent.changeText(passwordInput,'xuan')
+    expect(passwordInput.props.value).toBe('xuan')
+    expect(emailInput.props.value).toBe('test1@gmail.com')    
 })
-//error alert if firebase authentication wrong
