@@ -81,7 +81,7 @@ export default function ViewOrderScreen({navigation, route}) {
                     deleteDoc(doc(db,"Order",auth.currentUser.email));
                     navigation.navigate("OrdererHome");
                 } },
-                { text: "Yes & Report Issue", onPress: () => {
+                { text: "Report Issue", onPress: () => {
                     console.log('deleted request and order 2')
 
                     const docRef = doc(db, "user", email)
