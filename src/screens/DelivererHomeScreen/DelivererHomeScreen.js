@@ -5,7 +5,17 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 
 export default function DelivererHomeScreen({route, navigation}) {
-    const onMakeNewReq = () => {navigation.navigate("WhereToBuyFood")}
+    const onMakeNewReq = () => {
+        const docRef = doc(db, "Request", auth.currentUser.email)
+        const docSnap = getDoc(docRef)
+        .then(docSnap => {
+            if (docSnap.exists()) {
+                alert("You have an existing request! View it by pressing the View Request option.")
+            } else {
+                navigation.navigate("WhereToBuyFood")
+            }
+        })
+    }
     const onCheckCurrentReq = () => {navigation.navigate("ShowingRequest")}
     const [userName,setUserName] = useState("")
     const auth = getAuth()
@@ -29,6 +39,9 @@ export default function DelivererHomeScreen({route, navigation}) {
             <View style={styles.profileWrap}>
             <Text style={styles.welcomeText1}> Welcome</Text>
             <Text style={styles.welcomeText2}> {userName}!</Text>
+            <TouchableOpacity onPress={()=>{navigation.navigate("Profile")}}> 
+                <Image style={styles.profileImage} source={require('../../../assets/profile.png')}/>
+            </TouchableOpacity>
         </View>
             <TouchableOpacity 
                     onPress={() => onMakeNewReq()}>
@@ -49,4 +62,3 @@ export default function DelivererHomeScreen({route, navigation}) {
 
     )
 }
-
